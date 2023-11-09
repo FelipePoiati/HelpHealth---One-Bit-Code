@@ -10,6 +10,13 @@ const [weight, setWeight]= useState(null)
 const [messageIMC, setMessageIMC]= useState("Preencha o peso e altura")
 const [imc, setIMC]= useState(null)
 const [TextButton, setTextButton]= useState("Calcular")
+const [errorMessage, setErrorMessage]= useState(null)
+
+function verificationIMC(){
+  if (imc == null){
+    setErrorMessage("*Campo obritatório*")
+  }
+}
 
 function imcCalculator(){
     return setIMC((weight/(height*height)).toFixed(2))
@@ -22,8 +29,10 @@ function validationIMC(){
       setWeight(null)
       setMessageIMC("Seu IMC é igual:")
       setTextButton("Calcular Novamente")
+      setErrorMessage(null)
       return
     }
+    verificationIMC()
     setIMC(null)
     setTextButton("Calcular")
     setMessageIMC("Preencha o peso e altura")
@@ -33,6 +42,7 @@ function validationIMC(){
         <View style={styles.formContext}>
           <View style={styles.form}>
             <Text style={styles.formLabel}>Altura</Text>
+            <Text style={styles.errorMessage}>{errorMessage}</Text>
               <TextInput
                 style={styles.input} 
                 onChangeText={setHeight}
@@ -42,6 +52,7 @@ function validationIMC(){
               />
 
             <Text style={styles.formLabel}>Peso</Text>
+            <Text style={styles.errorMessage}>{errorMessage}</Text>
               <TextInput 
                 style={styles.input}
                 onChangeText={setWeight}
