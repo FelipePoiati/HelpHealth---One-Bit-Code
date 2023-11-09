@@ -38,7 +38,7 @@ function validationIMC(){
                 onChangeText={setHeight}
                 value={height}
                 placeholder="Ex. 1.74"
-                keyboardType="numeric"
+                keyboardType="numbers-and-punctuation"
               />
 
             <Text style={styles.formLabel}>Peso</Text>
@@ -47,7 +47,7 @@ function validationIMC(){
                 onChangeText={setWeight}
                 value={weight}
                 placeholder="Ex. 75.36"
-                keyboardType="numeric"
+                keyboardType="numbers-and-punctuation"
               />
               <TouchableOpacity
                 style={styles.buttonCalculator}
