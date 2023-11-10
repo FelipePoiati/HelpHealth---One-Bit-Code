@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { TextInput, View, Text, TouchableOpacity } from "react-native";
+import { TextInput,
+         View,
+         Text,
+         TouchableOpacity,
+         Vibration,
+         Pressable,
+         Keyboard, } from "react-native";
 import ResultIMC from "./ResultIMC/";
 import styles from "./style";
 
@@ -14,12 +20,14 @@ const [errorMessage, setErrorMessage]= useState(null)
 
 function verificationIMC(){
   if (imc == null){
+    Vibration.vibrate();
     setErrorMessage("*Campo obritatório*")
   }
 }
 
 function imcCalculator(){
-    return setIMC((weight/(height*height)).toFixed(2))
+    let heightFormat = height.replace(",",".")
+    return setIMC((weight/(heightFormat*heightFormat)).toFixed(2))
 }
 
 function validationIMC(){
@@ -39,7 +47,7 @@ function validationIMC(){
 }
 
     return(
-        <View style={styles.formContext}>
+        <Pressable onPress={Keyboard.dismiss} style={styles.formContext}>
           <View style={styles.form}>
             <Text style={styles.formLabel}>Altura</Text>
             <Text style={styles.errorMessage}>{errorMessage}</Text>
@@ -48,7 +56,7 @@ function validationIMC(){
                 onChangeText={setHeight}
                 value={height}
                 placeholder="Ex. 1.74"
-                keyboardType="numbers-and-punctuation"
+                keyboardType="numeric"
               />
 
             <Text style={styles.formLabel}>Peso</Text>
@@ -58,7 +66,7 @@ function validationIMC(){
                 onChangeText={setWeight}
                 value={weight}
                 placeholder="Ex. 75.36"
-                keyboardType="numbers-and-punctuation"
+                keyboardType="numeric"
               />
               <TouchableOpacity
                 style={styles.buttonCalculator}
@@ -70,6 +78,6 @@ function validationIMC(){
               </TouchableOpacity>
           </View>
           <ResultIMC messageResultIMC={messageIMC} ResultIMC={imc}/>
-        </View>
+        </Pressable>
     );
 }
