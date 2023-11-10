@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     width:"100%",
   },
   numberIMC:{
-    fontSize:25,
+    fontSize:50,
     color:"#0000FF",
     fontWeight:"bold",
   },
